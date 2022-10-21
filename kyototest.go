@@ -33,20 +33,25 @@ func onAssignEvent(contest, configs string) {
 }
 
 func onInsertEvent(qso *reiwa.QSO) {
-	_, ok := mul2map[qso.GetMul2()]
-	if ok {
-		mul2map[qso.GetMul2()] += 1
-	} else {
-		mul2sum += 1
-		mul2map[qso.GetMul2()] = 1
+        if len(qso.GetMul2()) >= 3 {
+	   _, ok := mul2map[qso.GetMul2()]
+	   if ok {
+	      mul2map[qso.GetMul2()] += 1
+	   } else {
+	     mul2sum += 1
+	     mul2map[qso.GetMul2()] = 1
+	     qso.SetNote("new multi " + qso.GetMul2())
+	   }
 	}
 }
 
 func onDeleteEvent(qso *reiwa.QSO) {
-	mul2map[qso.GetMul2()] -= 1
-	if mul2map[qso.GetMul2()] == 0 {
+        if len(qso.GetMul2()) >= 3 {
+	   mul2map[qso.GetMul2()] -= 1
+	   if mul2map[qso.GetMul2()] == 0 {
 		mul2sum -= 1
 		delete(mul2map, qso.GetMul2())
+	   }
 	}
 }
 
