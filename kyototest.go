@@ -33,7 +33,7 @@ func onAssignEvent(contest, configs string) {
 }
 
 func onInsertEvent(qso *reiwa.QSO) {
-	_, ok = mul2map[qso.GetMul2()]
+	_, ok := mul2map[qso.GetMul2()]
 	if ok {
 		mul2map[qso.GetMul2()] += 1
 	} else {
