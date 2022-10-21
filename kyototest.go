@@ -33,7 +33,7 @@ func onAssignEvent(contest, configs string) {
 }
 
 func onInsertEvent(qso *reiwa.QSO) {
-        if len(qso.GetMul2()) >= 3 {
+        if isInPref(qso.GetMul2()) {
 	   _, ok := mul2map[qso.GetMul2()]
 	   if ok {
 	      mul2map[qso.GetMul2()] += 1
@@ -46,7 +46,7 @@ func onInsertEvent(qso *reiwa.QSO) {
 }
 
 func onDeleteEvent(qso *reiwa.QSO) {
-        if len(qso.GetMul2()) >= 3 {
+        if isInPref(qso.GetMul2()) {
 	   mul2map[qso.GetMul2()] -= 1
 	   if mul2map[qso.GetMul2()] == 0 {
 		mul2sum -= 1
