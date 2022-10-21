@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2020 JA1ZLO.
+Copyright (C) 2020 JA1ZLO.
 */
 package main
 
@@ -35,31 +35,31 @@ func onAssignEvent(contest, configs string) {
 func onInsertEvent(qso *reiwa.QSO) {
 	_, ok = mul2map[qso.GetMul2()]
 	if ok {
-	   mul2map[qso.GetMul2()] += 1
+		mul2map[qso.GetMul2()] += 1
 	} else {
-	   mul2sum += 1
-	   mul2map[qso.GetMul2()] = 1
+		mul2sum += 1
+		mul2map[qso.GetMul2()] = 1
 	}
 }
 
 func onDeleteEvent(qso *reiwa.QSO) {
 	mul2map[qso.GetMul2()] -= 1
 	if mul2map[qso.GetMul2()] == 0 {
-	   mul2sum -= 1
-	   delete(mul2map, qso.GetMul2())
+		mul2sum -= 1
+		delete(mul2map, qso.GetMul2())
 	}
 }
 
 func isInPref(mul1 string) bool {
-	return len(mul1) => 3
+	return len(mul1) >= 3
 }
 
 func isIn_to_In(rcvd_mul1, sent_mul1 string) bool {
-        return isInPref(rcvd_mul1) == true && isInPref(sent_mul1) == true 
+	return isInPref(rcvd_mul1) == true && isInPref(sent_mul1) == true
 }
 
 func isOut_to_Out(rcvd_mul1, sent_mul1 string) bool {
-        return isInPref(rcvd_mul1) == false && isInPref(sent_mul1) == false
+	return isInPref(rcvd_mul1) == false && isInPref(sent_mul1) == false
 }
 
 func score(rcvd_mul1, sent_mul1 string) byte {
