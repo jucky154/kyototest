@@ -28,7 +28,7 @@ func init() {
 }
 
 func onAssignEvent(contest, configs string) {
-	mul2map = make(map[string]bool)
+	mul2map = make(map[string]int)
 	mul2sum = 0
 }
 
