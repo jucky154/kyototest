@@ -25,6 +25,7 @@ func init() {
 	reiwa.AllowBandRange(reiwa.K1900, reiwa.M5600)
 	reiwa.AllowModeRange(reiwa.CW, reiwa.AM)
 	reiwa.AllowRcvd(`^([A-Z]{1}\d{2}|[A-Z]{2})(\d{3}|[A-Z]{2})$`)
+	reiwa.AllowCall(`^\w{3,}`)
 }
 
 func onAssignEvent(contest, configs string) {
@@ -85,7 +86,7 @@ func onAcceptEvent(qso *reiwa.QSO) {
 	sent_mul1 := sent[1]
 	qso.Score = score(rcvd_mul1, sent_mul1)
 	qso.SetMul1(rcvd_mul1)
-	qso.SetMul1(rcvd_mul2)
+	qso.SetMul2(rcvd_mul2)
 }
 
 func onPointsEvent(score, mults int) int {
